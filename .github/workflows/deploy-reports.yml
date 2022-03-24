@@ -1,0 +1,26 @@
+name: Deployment
+
+# Controls when the workflow will run
+on:
+  push:
+    branches: [ main ]
+
+env:
+  PROFILE: Folders
+  ENVIRONMENT: Development
+
+jobs:
+  Deployment:
+    runs-on: ubuntu-latest
+    environment: Development
+    container:
+      image: ghcr.io/pbi-tools/pbi-tools-core:latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      - name: pbi-tools deploy
+        run: /app/pbi-tools/pbi-tools.core deploy . "$PROFILE" "$ENVIRONMENT"
+        env:
+          PBI_CLIENT_SECRET: ${{ secrets.PBI_CLIENT_SECRET }}
