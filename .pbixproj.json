@@ -1,29 +1,34 @@
 {
-    "version": "0.11",
-    "created": "2022-03-01T18:09:54.2556434+00:00",
-    "deployments": {
-      "Folders": {
-        "mode": "Report",
-        "source": {
-          "type": "Folder",
-          "path": "./*"
+  "version": "0.12",
+  "deployments": {
+    "Reports": {
+      "mode": "Report",
+      "source": {
+        "type": "Folder",
+        "path": "./*"
+      },
+      "authentication": {
+        "type": "ServicePrincipal",
+        "tenantId": "pbitools.org",
+        "clientId": "d3ab932a-f6dc-4a2e-b04d-a3f5a063394b",
+        "clientSecret": "%PBI_CLIENT_SECRET%"
+      },
+      "options": {
+        "import": {
+          "nameConflict": "CreateOrOverwrite"
+        }
+      },
+      "environments": {
+        "Development": {
+          "workspace": "Reports DevOps [DEV]"
         },
-        "authentication": {
-          "type": "ServicePrincipal",
-          "tenantId": "pbitools.org",
-          "clientId": "d3ab932a-f6dc-4a2e-b04d-a3f5a063394b",
-          "clientSecret": "%PBI_CLIENT_SECRET%"
+        "Staging": {
+          "workspace": "Reports DevOps [UAT]"
         },
-        "options": {
-          "import": {
-            "nameConflict": "CreateOrOverwrite"
-          }
-        },
-        "environments": {
-          "Development": {
-            "workspace": "Berlin UG Demo [Dev]"
-          }
+        "Production": {
+          "workspace": "Reports DevOps"
         }
       }
     }
   }
+}
